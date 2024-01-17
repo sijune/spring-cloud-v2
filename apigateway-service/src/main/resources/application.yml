@@ -47,6 +47,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter # GET은 권한 필터 필요
         - id: catalog-service
           uri: lb://CATALOG-SERVICE # eureka에 물어본다. lb 적용
           predicates:
@@ -77,3 +78,5 @@ spring:
                 preLogger: true
                 postLogger: true
 
+token:
+  secret: user_token
