@@ -28,6 +28,6 @@ public class CatalogEntity implements Serializable {
     private Integer unitPrice;
 
     @Column(nullable = false, updatable = false, insertable = false)
-    @ColumnDefault(value = "CURRENT_TIMESTAMP")
+    @ColumnDefault(value = "CURRENT_TIMESTAMP") // 자동으로 세팅되게 한다. H2 현재시간 가져오는 방법
     private Date createdAt;
 }
