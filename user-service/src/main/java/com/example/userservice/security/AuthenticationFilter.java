@@ -39,8 +39,9 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
         try{
-            RequestLogin creds = new ObjectMapper().readValue(request.getInputStream(), RequestLogin.class);
+            RequestLogin creds = new ObjectMapper().readValue(request.getInputStream(), RequestLogin.class); //POST로 전달된 데이터를 받을 수 있음
             //AuthenticationManager에 토큰 형식으로 로그인 가능여부 질의
+            //AuthenticationManager에 위임
             return getAuthenticationManager().authenticate(
                     new UsernamePasswordAuthenticationToken(
                             creds.getEmail(),
@@ -60,7 +61,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-        String userName = ((User)authResult.getPrincipal()).getUsername();
+        String userName = ((User)authResult.getPrincipal()).getUsername(); // 스프링 시큐리티 User 객체
         UserDto userDetails = userService.getUserDetailsByEmail(userName);
 
         String token = Jwts.builder()

@@ -1,0 +1,10 @@
+# application.yml 보다 우선순위가 높다
+spring:
+  cloud:
+    config:
+      uri: http://127.0.0.1:8888
+#      name: config-service # config-service의 application.yml을 가져온다
+      name: ecommerce
+
+#  profiles:
+#    active: prod

@@ -1,0 +1,24 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    config:
+      server:
+        git:
+#          uri: file:///Users/leesij/Desktop/project/git-local-repo-v2
+          uri: https://github.com/sijune/spring-cloud-config-v2
+
+# actuator 등록
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh

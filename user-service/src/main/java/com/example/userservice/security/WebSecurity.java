@@ -31,10 +31,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         //http.authorizeRequests().antMatchers("/users/**").permitAll();
+        http.authorizeRequests().antMatchers("/actuator/**").permitAll();
         http.authorizeRequests()
                 .antMatchers("/error/**").permitAll()
                 .antMatchers("/**")
-                .hasIpAddress("192.168.11.32")
+                .hasIpAddress("192.168.9.173")
                 .and()
                 .addFilter(getAuthenticationFilter());
         http.headers().frameOptions().disable();
@@ -49,6 +50,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     //**********************************************
 
+
+    //인증객체를 만듦 (AuthenticationProvider와 동일한 역할)
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
